@@ -41,9 +41,9 @@ from random import sample, seed
 # use('Agg')
 import matplotlib.pyplot as plt
 from scipy.stats import gumbel_r
-from matrix import readScoreMatrix, getMatrix
-from alignment import smithWaterman, needlemanWunsch
-from sequence import getUniprotSeq
+from consequent.matrix import readScoreMatrix, getMatrix
+from consequent.alignment import smithWaterman, needlemanWunsch
+from consequent.sequence import getUniprotSeq
 import argparse
 from tqdm import tqdm
 
@@ -62,7 +62,7 @@ smatrix = "BLOSUM62"
 
 # Parse commmand line arguments
 parser = argparse.ArgumentParser(
-    "smithwat_mp.py", description="Sequence aligment significance analysis.",
+    "align_check.py", description="Sequence aligment significance analysis.",
     formatter_class=argparse.ArgumentDefaultsHelpFormatter)
 
 parser.add_argument("-A", "--alignment-method",
@@ -71,9 +71,9 @@ parser.add_argument("-A", "--alignment-method",
 parser.add_argument("-N", "--random-scrambles",
                     help="Number of random scrambles.", default=100, type=int)
 parser.add_argument("-o", "--gap-opening",
-                    help="Penalty score for gap opening.", default=-10, type=float)
+                    help="Penalty score for gap opening.", default=10, type=float)
 parser.add_argument("-e", "--gap-extension",
-                    help="Penalty socre for gap extension.", default=-1, type=float)
+                    help="Penalty socre for gap extension.", default=1, type=float)
 parser.add_argument("-S", "--sequences", nargs=2, metavar=('UniprotA', 'UniprotB'),
                     help="Sequences to align (Uniprot Codes)",
                     type=str, default=["", ""])
