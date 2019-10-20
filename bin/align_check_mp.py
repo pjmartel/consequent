@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 # align_check_mp.py --
 #
 # Aligns two sequences locally or globally and tests
@@ -32,7 +33,7 @@
 #
 #  Pre-requisites: numpy, sciypy, matplotlib, Biopython, tqdm
 #
-#
+#  This is the multiprocessing enabled version.
 #
 import numpy as np
 from random import sample, seed
@@ -43,8 +44,25 @@ from scipy.stats import gumbel_r
 from matrix import readScoreMatrix, getMatrix
 from alignment import smithWaterman, needlemanWunsch
 from sequence import getUniprotSeq
+from multiprocessing import Process, Manager
 import argparse
 from tqdm import tqdm
+
+
+def scrambler_aligner(pn, ssd, N, sa, sb, ms, go, ge):
+    seed()  # Without this, the random sequences are the same
+    # for every process!
+    sscores = []
+    # Show the tqdm progress bar only for process 0 !
+    for i in tqdm(range(N)) if pn == 0 else range(N):
+        # print("Process {}, pass {} ".format(pn,i+1)
+        sb = "".join(sample(sb, len(sb)))  # scramble b sequence
+        s, a, ma, ta = alignFunction(
+            sa, sb, ms, gapO=go, gapE=ge, ScoreOnly=True)
+
+        sscores.append(s)
+
+    ssd[pn] = sscores
 
 
 # seqB = "HEAGAWGHEE"
@@ -78,8 +96,11 @@ parser.add_argument("-S", "--sequences", nargs=2, metavar=('UniprotA', 'UniprotB
                     type=str, default=["", ""])
 parser.add_argument("-m", "--score-matrix",
                     help="Scoring matrix file.", default="BLOSUM62", type=str)
+parser.add_argument("-p", "--cores",
+                    help="Number of cores to use in computation.", default=4, type=int)
 parser.add_argument("-s", "--seed",
                     help="Random number generator seed.", default=1234, type=int)
+
 
 print()
 print("/// Statistical analysis of sequence alignments. ///")
@@ -88,6 +109,7 @@ print()
 
 args = parser.parse_args()
 N = args.random_scrambles
+core_count = args.cores
 gapOpen = -args.gap_opening
 gapExtend = -args.gap_extension
 smatrix = args.score_matrix
@@ -131,8 +153,6 @@ print("Alignment length:", len(ua[0]))
 print("Unscrambled alignment:")
 print()
 w = 60  # alignment width
-
-
 for i in range(1 + len(ua[0]) // w):
     print("SeqA - ", ua[0][w*i:w*(i+1)], w*(i+1) % len(ua[0]))
     print("SeqB - ", ua[1][w*i:w*(i+1)], w*(i+1) % len(ua[0]))
@@ -143,16 +163,31 @@ if N == 0:
     exit(0)
 
 print("Calculating distribution of scores for {} scrambled alignments.".format(N))
+print("Using {} processor cores.".format(core_count))
 
+# Distribute random scrambles across cores
+N_per_core = [N//core_count + (1 if k < (N % core_count) else 0)
+              for k in range(core_count)]
+#core_count = 4
+print("Steps per core: ", N_per_core)
 
-sscores = []
-# Calculate the N random alignments
-for i in tqdm(range(N)):
-    seqB = "".join(sample(seqB, len(seqB)))
-    s, a, ma, ta = alignFunction(
-        seqA, seqB, matScore, gapOpen, gapExtend, ScoreOnly=True)
+# Setup up multiprocessing
+procs = []
+sscores_dict = Manager().dict()
 
-    sscores.append(s)
+# Launch subprocesses
+for i in range(core_count):
+    proc = Process(target=scrambler_aligner, args=(
+        i, sscores_dict, N_per_core[i], seqA, seqB, matScore, gapOpen, gapExtend))
+    procs.append(proc)
+    proc.start()
+
+for proc in procs:
+    proc.join()
+
+# print(sscores_dict.values())
+sscores = sum(sscores_dict.values(), [])
+
 
 # Fit extreme value distribution to the scramble alignment data
 miu, beta = gumbel_r.fit(sscores)
@@ -197,6 +232,7 @@ saved_vars = {k: L[k] for k in ('N',
                                 'gapOpen',
                                 'gapExtend',
                                 'smatrix',
+                                'uscore',
                                 'sscores',
                                 'seqA',
                                 'seqB')}

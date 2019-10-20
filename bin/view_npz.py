@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 import numpy as np
 from random import sample, seed
 #from matplotlib  import use

@@ -1,0 +1,5 @@
+include README.rst
+include matrices/*
+include samples/*
+include sequences/*
+inculde tests/*
