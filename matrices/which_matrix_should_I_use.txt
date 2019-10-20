@@ -1,0 +1,50 @@
+Which matrix should I use?
+
+
+
+The general consensus is that matrices derived from observed
+substitution data (e.g. the Dayhoff or BLOSUM matrices) are superior
+to identity, genetic code or physical property matrices (e.g. see
+[3]). However, there are Dayhoff matrices of different PAM values and
+BLOSUM matrices of different percentage identity and which of these
+should be used?
+
+Schwartz and Dayhoff [2] recommended a mutation data matrix for the
+distance of 250 PAMs as a result of a study using a dynamic
+programming procedure [13] to compare a variety of proteins known to
+be distantly related. The 250 PAM matrix was selected since in Monte
+Carlo studies (see Section 4.1) matrices reflecting this evolutionary
+distance gave a consistently higher significance score than other
+matrices in the range 0-750 PAM. The matrix also gave better scores
+when compared to McLachlan's substitution matrix [6], the genetic code
+matrix and identity scoring. Recently, Altschul [14] has examined
+Dayhoff style mutation data matrices from an information theoretical
+perspective. For alignments that do not include gaps he concluded, in
+broad agreement with Schwarz and Dayhoff, that a matrix of 200 PAMS
+was most appropriate when the sequences to be compared were thought to
+be related. However, when comparing sequences that were not known in
+advance to be related, for example when database scanning, a 120 PAM
+matrix was the best compromise. When using a local alignment method
+(Section 6.7) Altschul suggests that three matrices should ideally be
+used: PAM40, PAM120 and PAM250, the lower PAM matrices will tend to
+find short alignments of highly similar sequences, while higher PAM
+matrices will find longer, weaker local alignments. Similar
+conclusions were reached by Collins and Coulson [15] who advocate
+using a compromise PAM100 matrix, but also suggest the use of multiple
+PAM matrices to allow detection of local similarities of all types.
+
+Henikoff and Henikoff [16] have compared the BLOSUM matrices to PAM,
+PET, Overington, Gonnet [17] and multiple PAM matrices by evaluating
+how effectively the matrices can detect known members of a protein
+family from a database when searching with the ungapped local
+alignment program BLAST [18]. They conclude that overall the BLOSUM 62
+matrix is the most effective. However, all the substitution matrices
+investigated perform better than BLOSUM 62 for a proportion of the
+families. This suggests that no single matrix is the complete answer
+for all sequence comparisons. It is probably best to compliment the
+BLOSUM 62 matrix with comparisons using PET91 at 250 PAMS, and
+Overington structurally derived matrices. It seems likely that as more
+protein three dimensional structures are determined, substitution
+tables derived from structure comparison will give the most reliable
+data.
+
