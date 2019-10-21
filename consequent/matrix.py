@@ -28,8 +28,8 @@ def OLD_readScoreMatrix(filename):
 
 
 def readScoreMatrix(filename):
-    print(os.path.dirname(__file__)+"/../matrices/"+filename)
-    filename = os.path.dirname(__file__)+"/../matrices/"+filename
+    print(os.path.dirname(__file__)+"/matrices/"+filename)
+    filename = os.path.dirname(__file__)+"/matrices/"+filename
     try:
         with open(filename) as f:
             lines = (line for line in f if not line.startswith('#'))

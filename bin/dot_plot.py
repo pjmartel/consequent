@@ -10,8 +10,8 @@ from matplotlib.figure import Figure
 from matplotlib.patches import Rectangle, Circle
 import numpy as np
 from sys import argv
-from score_matrix import readScoreMatrix, getMatrix
-from get_seq import getUniprotSeq
+from consequent.matrix import readScoreMatrix, getMatrix
+from consequent.sequence import getUniprotSeq
 import matplotlib.pyplot as plt
 import matplotlib
 from scipy.signal import convolve2d as cv2

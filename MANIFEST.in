@@ -1,5 +1,5 @@
 include README.rst
-include matrices/*
+include consequent/matrices/*
 include samples/*
 include sequences/*
-inculde tests/*
+include tests/*

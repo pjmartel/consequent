@@ -7,6 +7,7 @@ def readme():
 
 
 setup(name='consequent',
+      include_package_data=True,
       version='0.1',
       description='Biological sequence tools',
       long_description=readme(),
@@ -25,5 +26,7 @@ setup(name='consequent',
           'scipy',
           'matplotlib',
           'biopython',
+          'requests',
+          'tqdm',
       ],
       zip_safe=False)
