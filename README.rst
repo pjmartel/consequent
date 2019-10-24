@@ -1,6 +1,7 @@
 This is the consequent biological sequences tool package.
 
-#### Command-line Tools
+Command-line Tools
+------------------
 
 align_check.py -- sequence alignment with statiscal significance
 align_check_mp.py -- same as above with multiprocessing support
@@ -14,7 +15,8 @@ sequence.py -- read, write and retrieve biological sequences
 alignment.py -- routines implementing various alignment algorithms
 
 
-#### Installation
+Installation
+------------
 
 1) Create a python virtual environment
 
