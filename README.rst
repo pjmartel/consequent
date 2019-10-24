@@ -19,7 +19,7 @@ Modules
 Installation
 ------------
 
-1. Create a python virtual environment
+1. Create a python virtual environment::
 
    `$ python3 -m venv <name>`
 
