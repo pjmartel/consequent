@@ -1,37 +1,37 @@
 This is the consequent biological sequences tool package.
 
 Command-line Tools
-------------------
+******************
 
-align_check.py -- sequence alignment with statiscal significance
-align_check_mp.py -- same as above with multiprocessing support
-dot_plot.py -- makes comparison dot plots of two protein sequences
+**align_check.py** -- sequence alignment with statiscal significance
+**align_check_mp.py** -- same as above with multiprocessing support
+**dot_plot.py** -- makes comparison dot plots of two protein sequences
 
 
 Modules
 *******
 
-matrix.py -- read and write scoring matrices
-sequence.py -- read, write and retrieve biological sequences
-alignment.py -- routines implementing various alignment algorithms
+**matrix.py** -- read and write scoring matrices
+**sequence.py** -- read, write and retrieve biological sequences
+**alignment.py** -- routines implementing various alignment algorithms
 
 
 Installation
 ------------
 
-1) Create a python virtual environment
+1. Create a python virtual environment
 
    `$ python3 -m venv <name>`
 
-2) Activate the virtual environment
+2. Activate the virtual environment
 
    `$ . <name>/bin/activate`
 
-3) Clone the repo
+3. Clone the repo
 
    `$ git clone https://github.com/pjmartel/consequent`
 
-4) Install with pip:
+4. Install with pip:
 
    `$ cd consequent ; pip install .`
 
