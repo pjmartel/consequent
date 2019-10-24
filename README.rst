@@ -21,17 +21,30 @@ Installation
 
 1. Create a python virtual environment::
 
-   `$ python3 -m venv <name>`
+   $ python3 -m venv <name>
 
 2. Activate the virtual environment::
 
-   `$ . <name>/bin/activate`
+   $ . <name>/bin/activate
 
 3. Clone the repo::
 
-   `$ git clone https://github.com/pjmartel/consequent`
+   $ git clone https://github.com/pjmartel/consequent
 
 4. Install with pip::
 
-   `$ cd consequent ; pip install .`
+   $ cd consequent ; pip install .
 
+
+Usage
+----
+
+The command-line tools are available on the virtual environent exec path::
+   $ dot_plot.py --help
+
+Import the modules from Python codo::
+   import consequent.matrix
+
+After using, use::
+   deactivate
+to exit the virtual environment.
