@@ -44,11 +44,15 @@ Usage
 *****
 
 The command-line tools are available on the virtual environent exec path::
+  
    $ dot_plot.py --help
 
 Import the modules from Python codo::
+  
    import consequent.matrix
 
 After using, use::
+  
    $ deactivate
+
 to exit the virtual environment.
