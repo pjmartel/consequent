@@ -23,15 +23,15 @@ Installation
 
    `$ python3 -m venv <name>`
 
-2. Activate the virtual environment
+2. Activate the virtual environment::
 
    `$ . <name>/bin/activate`
 
-3. Clone the repo
+3. Clone the repo::
 
    `$ git clone https://github.com/pjmartel/consequent`
 
-4. Install with pip:
+4. Install with pip::
 
    `$ cd consequent ; pip install .`
 
