@@ -1,4 +1,4 @@
-# !/usr/bin/env python
+#!/usr/bin/env python
 
 """
 Script to produce protein and nucleic acid dot plots.
@@ -21,7 +21,7 @@ import argparse
 
 
 class DotPlot:
-    def __init__(self, score_matrix='blosum50.txt', seqs=('ADE', 'WCA')):
+    def __init__(self, score_matrix='BLOSUM62', seqs=('ADE', 'WCA')):
         """
         Set the background and grid.
         Initialize the parent Figure class.
@@ -97,7 +97,7 @@ def main():
                         help="Plot size (width height)",
                         type=int, default=[10, 10])
     parser.add_argument("-m", "--score-matrix",
-                        help="Scoring matrix file.", default="blosum50.txt", type=str)
+                        help="Scoring matrix file.", default="BLOSUM62", type=str)
 
     parser.add_argument('UniprotA', help="Uniprot sequence code")
     parser.add_argument('UniprotB', help="Uniprot sequence code")
