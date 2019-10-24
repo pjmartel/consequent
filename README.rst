@@ -29,6 +29,7 @@ Installation
 
 2. Activate the virtual environment::
 
+   $ bash
    $ . <name>/bin/activate
 
 3. Clone the repo::
