@@ -51,7 +51,7 @@ Import the modules from Python codo::
   
    import consequent.matrix
 
-After using, use::
+When done, use::
   
    $ deactivate
 
