@@ -47,9 +47,9 @@ The command-line tools are available on the virtual environent exec path::
   
    $ dot_plot.py --help
 
-Import the modules from Python codo::
+Import the modules from Python::
   
-   import consequent.matrix
+   >>> import consequent.matrix
 
 When done, use::
   
